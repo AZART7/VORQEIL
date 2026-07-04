@@ -604,7 +604,7 @@
                         </div>
                     </div>
                     <div class="divider"><span>or continue with</span></div>
-                    <button class="google-btn" onclick="alert('Google login simulation. In production, integrate Firebase/Auth0.')">
+                    <button class="google-btn" id="googleLoginBtn">
                         <i class="fab fa-google"></i> Continue with Google
                     </button>
                     <p class="text-center mt-3" style="color:var(--text-muted); font-size:0.85rem;">By continuing, you agree to our Terms & Privacy Policy.</p>
@@ -796,6 +796,9 @@
         }
 
         console.log('%c🚀 VORQEIL %cPremium EdTech Platform %cReady', 'font-size:1.4rem;font-weight:bold;color:#06b6d4;', 'color:#94a3b8;', 'color:#10b981;font-weight:bold;');
+   document.getElementById("googleLoginBtn").addEventListener("click", function() {
+    window.location.href = "https://accounts.google.com";
+});
     </script>
 </body>
 </html>
