@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080c14" />
+    <meta name="description" content="VORQEIL - Premium digital skills learning platform. Master in-demand skills, earn online, and build a successful digital career." />
+    <meta name="keywords" content="digital skills, online courses, freelancing, VORQEIL, earn online, edtech, e-learning, premium courses" />
+    <title>VORQEIL — Where Potential Meets Possibility</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
+
+    <!-- Preloads -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- CSS Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css" />
+
+    <style>
+        :root {
+            --bg-deep: #06090f;
+            --bg-primary: #0b1019;
+            --bg-card: #111827;
+            --bg-card-hover: #1a2235;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-medium: rgba(255, 255, 255, 0.10);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-1: #6366f1;
+            --accent-2: #8b5cf6;
+            --accent-3: #06b6d4;
+            --accent-4: #10b981;
+            --accent-5: #f59e0b;
+            --gradient-hero: linear-gradient(135deg, #6366f1 0%, #8b5cf6 40%, #06b6d4 100%);
+            --gradient-card: linear-gradient(145deg, rgba(99, 102, 241, 0.08) 0%, rgba(6, 182, 212, 0.04) 100%);
+            --gradient-glow: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.25) 0%, transparent 60%);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 28px;
+            --radius-xl: 36px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.55);
+            --shadow-glow: 0 0 80px rgba(99, 102, 241, 0.2);
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            background-color: var(--bg-deep);
+            overflow-x: hidden;
+        }
+        #main-container {
+            background-color: var(--bg-deep);
+            will-change: transform;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            cursor: default;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--border-medium); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            width: 20px; height: 20px; border: 2px solid var(--accent-3); border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 99999;
+            transition: transform 0.15s ease, border-color 0.3s ease;
+            transform: translate(-50%, -50%); mix-blend-mode: difference;
+        }
+        .custom-cursor-dot {
+            width: 6px; height: 6px; background: #fff; border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 99999; transform: translate(-50%, -50%);
+        }
+        .custom-cursor.hover {
+            transform: translate(-50%, -50%) scale(1.8); border-color: #fff; background: rgba(255,255,255,0.08);
+        }
+        @media (max-width: 991px) {
+            .custom-cursor, .custom-cursor-dot { display: none; }
+        }
+
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 99990; opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 16px 0;
+            transition: all var(--transition-smooth); border-bottom: 1px solid transparent;
+        }
+        .header.scrolled {
+            background: rgba(6,9,15,0.85); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border-subtle); padding: 10px 0;
+        }
+        .header .navbar { padding: 0; }
+        .brand {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.7rem; font-weight: 700;
+            letter-spacing: -0.5px; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 2px;
+        }
+        .brand .accent { color: var(--accent-3); font-weight: 800; }
+        .brand-dot {
+            width: 8px; height: 8px; background: var(--accent-3); border-radius: 50%;
+            display: inline-block; margin-left: 2px; animation: pulse-dot 2s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%,100% { box-shadow: 0 0 0 0 rgba(6,182,212,0.6); }
+            50% { box-shadow: 0 0 0 10px rgba(6,182,212,0); }
+        }
+        .nav-link {
+            color: var(--text-secondary) !important; font-weight: 500; font-size: 0.92rem;
+            padding: 8px 16px !important; border-radius: 50px; transition: all var(--transition-fast); position: relative;
+        }
+        .nav-link:hover, .nav-link.active { color: #fff !important; background: rgba(255,255,255,0.04); }
+        .btn-nav {
+            background: var(--gradient-hero); border: none; color: #fff; font-weight: 600;
+            padding: 10px 24px; border-radius: 50px; font-size: 0.9rem; transition: all var(--transition-smooth);
+            text-decoration: none; display: inline-block; cursor: pointer;
+        }
+        .btn-nav:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(99,102,241,0.4); color: #fff; }
+
+        .navbar-toggler { border: none; padding: 0; width: 40px; height: 40px; position: relative; background: transparent; }
+        .navbar-toggler:focus { box-shadow: none; }
+        .navbar-toggler-icon {
+            background-image: none !important; position: relative; width: 24px; height: 2px;
+            background: #fff; border-radius: 2px; transition: all 0.3s;
+        }
+        .navbar-toggler-icon::before, .navbar-toggler-icon::after {
+            content: ''; position: absolute; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: all 0.3s;
+        }
+        .navbar-toggler-icon::before { top: -8px; }
+        .navbar-toggler-icon::after { top: 8px; }
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon { background: transparent; }
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before { top: 0; transform: rotate(45deg); }
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after { top: 0; transform: rotate(-45deg); }
+
+        /* Hero */
+        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; padding-top: 80px; }
+        .hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+        .hero-orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3; animation: orb-float 8s ease-in-out infinite; }
+        .hero-orb-1 { width: 600px; height: 600px; background: #6366f1; top: -200px; right: -150px; animation-delay: 0s; }
+        .hero-orb-2 { width: 400px; height: 400px; background: #8b5cf6; bottom: -150px; left: -100px; animation-delay: 3s; }
+        .hero-orb-3 { width: 300px; height: 300px; background: #06b6d4; top: 40%; left: 50%; transform: translate(-50%,-50%); animation-delay: 6s; opacity: 0.2; }
+        @keyframes orb-float {
+            0%,100% { transform: translate(0,0) scale(1); }
+            25% { transform: translate(30px,-40px) scale(1.08); }
+            50% { transform: translate(-20px,20px) scale(0.95); }
+            75% { transform: translate(-40px,-10px) scale(1.05); }
+        }
+        .hero-grid {
+            position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px; z-index: 0; mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+        }
+        .hero-content { position: relative; z-index: 1; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px; background: rgba(6,182,212,0.1);
+            border: 1px solid rgba(6,182,212,0.25); color: #67e8f9; padding: 8px 18px; border-radius: 50px;
+            font-size: 0.85rem; font-weight: 600; margin-bottom: 1.5rem; animation: fadeInUp 1s ease;
+        }
+        .hero-badge .live-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; animation: pulse-dot 2s ease-in-out infinite; }
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.5rem, 6vw, 4.2rem); font-weight: 800;
+            line-height: 1.1; letter-spacing: -1px; margin-bottom: 1.5rem;
+        }
+        .hero-title .gradient-text { background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-subtitle { font-size: 1.1rem; color: var(--text-secondary); max-width: 520px; margin-bottom: 2.5rem; line-height: 1.7; }
+        .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 3rem; }
+        .btn-primary-custom {
+            background: var(--gradient-hero); border: none; color: #fff; font-weight: 600; padding: 14px 32px;
+            border-radius: 50px; font-size: 1rem; text-decoration: none; display: inline-flex; align-items: center;
+            gap: 8px; transition: all var(--transition-smooth); position: relative; overflow: hidden; cursor: pointer;
+        }
+        .btn-primary-custom::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%); opacity: 0; transition: opacity 0.3s; }
+        .btn-primary-custom:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(99,102,241,0.45); color: #fff; }
+        .btn-primary-custom:hover::before { opacity: 1; }
+        .btn-outline-custom {
+            border: 1.5px solid var(--border-medium); color: #fff; font-weight: 600; padding: 14px 32px;
+            border-radius: 50px; font-size: 1rem; text-decoration: none; display: inline-flex; align-items: center;
+            gap: 8px; transition: all var(--transition-smooth); background: transparent; cursor: pointer;
+        }
+        .btn-outline-custom:hover { border-color: #fff; background: rgba(255,255,255,0.04); color: #fff; }
+        .hero-stats-row { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+        .hero-stat h3 { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: #fff; margin: 0; }
+        .hero-stat h3 .plus { color: var(--accent-3); }
+        .hero-stat p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+        .hero-visual { position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; }
+        .hero-card-stack { position: relative; width: 100%; max-width: 420px; aspect-ratio: 3/4; }
+        .hero-floating-card {
+            position: absolute; background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: var(--radius-md);
+            padding: 16px 20px; backdrop-filter: blur(10px); box-shadow: var(--shadow-md); animation: float-card 5s ease-in-out infinite;
+            font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 10px;
+        }
+        .hero-floating-card.card-a { top: 5%; right: -10%; animation-delay: 0s; }
+        .hero-floating-card.card-b { bottom: 20%; left: -15%; animation-delay: 1.5s; }
+        .hero-floating-card.card-c { bottom: 40%; right: -5%; animation-delay: 3s; font-size: 0.8rem; }
+        @keyframes float-card { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-18px); } }
+        .hero-main-img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border: 1px solid var(--border-medium); }
+
+        @media (max-width: 991px) {
+            .hero-floating-card.card-a { top: 0; right: 0; }
+            .hero-floating-card.card-b { bottom: 10%; left: 0; }
+            .hero-floating-card.card-c { display: none; }
+            .hero-stats-row { gap: 1.5rem; }
+        }
+
+        /* Sections */
+        .section-padding { padding: 100px 0; }
+        @media (max-width: 768px) { .section-padding { padding: 60px 0; } }
+        .section-tag {
+            display: inline-block; background: rgba(99,102,241,0.12); color: #a5b4fc; padding: 6px 16px;
+            border-radius: 50px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 1rem; text-transform: uppercase;
+        }
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
+            letter-spacing: -0.5px; margin-bottom: 1rem; line-height: 1.2;
+        }
+        .section-title .gradient-text { background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .section-text { color: var(--text-secondary); font-size: 1.05rem; max-width: 600px; line-height: 1.7; }
+
+        /* Client Slider */
+        .client-slider-wrap { border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px 0; background: rgba(255,255,255,0.01); }
+        .client-logo-item { display: flex; align-items: center; justify-content: center; padding: 10px 24px; font-weight: 700; font-size: 1rem; color: var(--text-muted); white-space: nowrap; letter-spacing: 1px; opacity: 0.6; transition: opacity 0.3s; }
+        .client-logo-item:hover { opacity: 1; color: #fff; }
+
+        .about-img-wrap { position: relative; border-radius: var(--radius-lg); overflow: hidden; }
+        .about-img-wrap img { width: 100%; border-radius: var(--radius-lg); object-fit: cover; }
+        .about-float-badge { position: absolute; bottom: 20px; right: -15px; background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: var(--radius-md); padding: 14px 18px; display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.9rem; box-shadow: var(--shadow-md); backdrop-filter: blur(10px); }
+
+        /* Package Cards */
+        .package-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden; transition: all var(--transition-smooth); height: 100%; position: relative; }
+        .package-card:hover { transform: translateY(-12px); box-shadow: var(--shadow-lg), var(--shadow-glow); border-color: var(--border-medium); }
+        .package-card-img { height: 180px; overflow: hidden; }
+        .package-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+        .package-card:hover .package-card-img img { transform: scale(1.06); }
+        .package-card-body { padding: 1.5rem; }
+        .package-card-body h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; margin-bottom: 0.5rem; }
+        .package-price { font-size: 1.6rem; font-weight: 700; color: var(--accent-3); margin: 0.8rem 0; }
+        .package-card .btn { border-radius: 50px; font-weight: 600; }
+        .package-badge { position: absolute; top: 14px; right: 14px; background: var(--accent-5); color: #000; font-weight: 700; font-size: 0.7rem; padding: 5px 12px; border-radius: 50px; z-index: 2; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* How It Works */
+        .step-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2rem 1.5rem; text-align: center; transition: all var(--transition-smooth); position: relative; overflow: hidden; }
+        .step-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: var(--border-medium); }
+        .step-number { font-family: 'Space Grotesk', sans-serif; font-size: 4rem; font-weight: 900; color: rgba(255,255,255,0.03); position: absolute; top: 10px; right: 20px; line-height: 1; }
+        .step-icon { font-size: 2.8rem; margin-bottom: 1rem; display: block; }
+
+        /* Physics */
+        .physics-container { width: 100%; height: 420px; border-radius: var(--radius-lg); overflow: hidden; background: transparent; border: 1px solid var(--border-subtle); position: relative; }
+        @media (max-width: 768px) { .physics-container { height: 300px; } }
+
+        /* Testimonials */
+        .testimonial-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2rem; margin: 8px; transition: all var(--transition-smooth); }
+        .testimonial-card:hover { border-color: var(--border-medium); box-shadow: var(--shadow-md); }
+        .testimonial-stars { color: #fbbf24; margin-bottom: 0.8rem; font-size: 0.9rem; }
+        .testimonial-text { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; font-style: italic; }
+        .testimonial-author { display: flex; align-items: center; gap: 12px; margin-top: 1.2rem; }
+        .testimonial-author img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border-medium); }
+        .testimonial-author h5 { margin: 0; font-weight: 600; font-size: 0.95rem; }
+        .testimonial-author span { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* FAQ */
+        .faq-accordion .accordion-item { background: var(--bg-card); border: 1px solid var(--border-subtle); margin-bottom: 10px; border-radius: var(--radius-md) !important; overflow: hidden; }
+        .faq-accordion .accordion-button { background: transparent; color: #fff; font-weight: 600; box-shadow: none !important; padding: 18px 24px; font-size: 1rem; }
+        .faq-accordion .accordion-button:not(.collapsed) { color: var(--accent-3); background: rgba(6,182,212,0.04); }
+        .faq-accordion .accordion-body { color: var(--text-secondary); padding: 0 24px 18px; }
+
+        /* CTA */
+        .cta-section { background: var(--gradient-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 60px 40px; text-align: center; position: relative; overflow: hidden; }
+        .cta-section::before { content: ''; position: absolute; width: 300px; height: 300px; background: var(--gradient-glow); border-radius: 50%; top: -100px; left: 50%; transform: translateX(-50%); pointer-events: none; }
+
+        /* Footer */
+        .footer { background: var(--bg-primary); border-top: 1px solid var(--border-subtle); padding: 60px 0 20px; }
+        .footer h5 { color: #fff; font-weight: 600; margin-bottom: 1rem; }
+        .footer a { color: var(--text-muted); text-decoration: none; transition: color 0.3s; font-size: 0.9rem; }
+        .footer a:hover { color: var(--accent-3); }
+        .footer-social a { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.04); color: var(--text-secondary); margin-right: 8px; transition: all var(--transition-fast); text-decoration: none; }
+        .footer-social a:hover { background: var(--accent-3); color: #fff; }
+        .app-download-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid var(--border-medium); border-radius: 50px; color: #fff; text-decoration: none; font-size: 0.85rem; transition: all var(--transition-fast); margin: 4px; }
+        .app-download-btn:hover { background: rgba(255,255,255,0.06); color: #fff; }
+
+        /* Modal */
+        .modal-content {
+            background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg); color: #fff;
+        }
+        .modal-header { border-bottom: 1px solid var(--border-subtle); }
+        .modal-header .btn-close { filter: invert(1); }
+        .modal-body { padding: 2rem; }
+        .auth-tabs .nav-link {
+            color: var(--text-secondary); border: none; font-weight: 600; padding: 10px 20px;
+            border-radius: 50px; margin: 0 5px; transition: all var(--transition-fast);
+        }
+        .auth-tabs .nav-link.active { background: var(--gradient-hero); color: #fff; }
+        .form-control {
+            background: rgba(255,255,255,0.04); border: 1px solid var(--border-medium); border-radius: 50px;
+            color: #fff; padding: 12px 20px;
+        }
+        .form-control:focus { box-shadow: 0 0 0 3px rgba(99,102,241,0.25); border-color: var(--accent-1); background: rgba(255,255,255,0.06); }
+        .google-btn {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: #fff; color: #333; font-weight: 600; border-radius: 50px; padding: 12px;
+            transition: all var(--transition-fast); border: none; width: 100%;
+        }
+        .google-btn:hover { background: #f1f3f4; transform: translateY(-1px); }
+        .divider { display: flex; align-items: center; gap: 15px; color: var(--text-muted); margin: 20px 0; }
+        .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border-medium); }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4,0,0.2,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        html.has-scroll-smooth { background-color: var(--bg-deep); }
+        html.has-scroll-smooth body { background-color: var(--bg-deep); }
+        [data-scroll-container] { background-color: var(--bg-deep); }
+    </style>
+</head>
+<body>
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-dot"></div>
+    <div class="noise-overlay"></div>
+
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg">
+                <a href="#" class="brand">VORQ<span class="accent">EIL</span><span class="brand-dot"></span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+                        <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#courses">Courses</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#testimonials">Reviews</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                        <li class="nav-item ms-lg-3"><a class="btn-nav trigger-auth" href="#">Get Started</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main data-scroll-container id="main-container">
+        <!-- Hero -->
+        <section class="hero" id="home" data-scroll-section>
+            <div class="hero-bg">
+                <div class="hero-orb hero-orb-1"></div>
+                <div class="hero-orb hero-orb-2"></div>
+                <div class="hero-orb hero-orb-3"></div>
+                <div class="hero-grid"></div>
+            </div>
+            <div class="container hero-content">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-7" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="hero-badge"><span class="live-dot"></span> Trusted by 150,000+ Learners Worldwide</div>
+                        <h1 class="hero-title">Where <span class="gradient-text">Potential</span><br />Finally Meets <span class="gradient-text">Possibility</span></h1>
+                        <p class="hero-subtitle">Explore high-impact digital programs — expertly designed to transform your curiosity into confidence and your skills into measurable results.</p>
+                        <div class="hero-buttons">
+                            <a href="#" class="btn-primary-custom trigger-auth">Explore Packages <i class="fas fa-arrow-right"></i></a>
+                            <a href="#courses" class="btn-outline-custom">Browse Courses <i class="fas fa-play-circle"></i></a>
+                        </div>
+                        <div class="hero-stats-row">
+                            <div class="hero-stat"><h3>100<span class="plus">+</span></h3><p>Expert Trainers</p></div>
+                            <div class="hero-stat"><h3>150<span class="plus">K+</span></h3><p>Students Trained</p></div>
+                            <div class="hero-stat"><h3>45<span class="plus">+</span></h3><p>Courses Available</p></div>
+                            <div class="hero-stat"><h3>5<span class="plus">M+</span></h3><p>Community Reach</p></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5" data-aos="fade-left" data-aos-duration="1200">
+                        <div class="hero-visual">
+                            <div class="hero-card-stack">
+                                <div class="hero-floating-card card-a"><i class="fas fa-chart-line" style="color:#10b981;"></i> Skill Growth ↗</div>
+                                <div class="hero-floating-card card-b"><i class="fas fa-certificate" style="color:#f59e0b;"></i> MSME Certified</div>
+                                <div class="hero-floating-card card-c"><i class="fas fa-users" style="color:#6366f1;"></i> 150K+ Community</div>
+                                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=800&fit=crop" alt="Learning at VORQEIL" class="hero-main-img" loading="eager" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Client Slider -->
+        <div class="client-slider-wrap" data-scroll-section>
+            <div class="splide" id="clientSplide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide"><span class="client-logo-item">FORBES</span></li>
+                        <li class="splide__slide"><span class="client-logo-item">ENTREPRENEUR</span></li>
+                        <li class="splide__slide"><span class="client-logo-item">TIMES OF INDIA</span></li>
+                        <li class="splide__slide"><span class="client-logo-item">HINDUSTAN TIMES</span></li>
+                        <li class="splide__slide"><span class="client-logo-item">YOURSTORY</span></li>
+                        <li class="splide__slide"><span class="client-logo-item">INC42</span></li>
+                        <li class="splide__slide"><span class="client-logo-item">ECONOMIC TIMES</span></li>
+                        <li class="splide__slide"><span class="client-logo-item">BUSINESS STANDARD</span></li>
+                        <li class="splide__slide"><span class="client-logo-item">THE HINDU</span></li>
+                        <li class="splide__slide"><span class="client-logo-item">MINT</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- About -->
+        <section class="section-padding" id="about" data-scroll-section>
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <span class="section-tag">About VORQEIL</span>
+                        <h2 class="section-title">We're Not Just a <span class="gradient-text">Platform</span> — We're a <span class="gradient-text">Movement</span></h2>
+                        <p class="section-text mb-4">At VORQEIL, we ignite the spark that turns raw curiosity into real-world capability. Our expertly crafted video courses — spanning marketing, automation, freelancing, finance, and creative arts — are designed by industry veterans who've been in the trenches. Here, you'll find hands-on toolkits, a thriving peer community, and inspiring events like the Astitva Youth Festival & Leadership Conclave. Backed by a mission to create genuine IMPACT.</p>
+                        <div class="d-flex gap-3 flex-wrap">
+                            <div class="hero-stat"><h3>100<span class="plus">+</span></h3><p>Expert Trainers</p></div>
+                            <div class="hero-stat"><h3>150<span class="plus">K+</span></h3><p>Trained Students</p></div>
+                            <div class="hero-stat"><h3>45<span class="plus">+</span></h3><p>Courses Rolling Out</p></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <div class="about-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=700&h=500&fit=crop" alt="VORQEIL Community" loading="lazy" />
+                            <div class="about-float-badge"><i class="fas fa-play-circle" style="font-size:1.8rem;color:var(--accent-3);"></i><span>Watch Our Story</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Packages -->
+        <section class="section-padding" id="packages" style="background:rgba(255,255,255,0.01);" data-scroll-section>
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-up">
+                    <span class="section-tag">Our Packages</span>
+                    <h2 class="section-title">Courses That <span class="gradient-text">Fuel</span> Your Evolution</h2>
+                    <p class="section-text mx-auto">Choose the package that fits your ambition. Each tier unlocks lifetime access, certification, and community.</p>
+                </div>
+                <div class="swiper packagesSwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide h-auto"><div class="package-card"><div class="package-card-img"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop" alt="Pro" loading="lazy" /></div><div class="package-card-body"><h3>Pro</h3><p style="color:var(--text-secondary);font-size:0.9rem;">Master essential skills like digital marketing, copywriting, Facebook ads, and content creation.</p><div class="package-price">₹11,800</div><a href="#" class="btn btn-primary w-100 trigger-auth">Buy Now</a></div></div></div>
+                        <div class="swiper-slide h-auto"><div class="package-card"><span class="package-badge">Popular</span><div class="package-card-img"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop" alt="Supreme" loading="lazy" /></div><div class="package-card-body"><h3>Supreme</h3><p style="color:var(--text-secondary);font-size:0.9rem;">Everything from Pro, plus advanced digital, finance, and creative skills for unstoppable growth.</p><div class="package-price">₹17,700</div><a href="#" class="btn btn-primary w-100 trigger-auth">Buy Now</a></div></div></div>
+                        <div class="swiper-slide h-auto"><div class="package-card"><div class="package-card-img"><img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=500&h=300&fit=crop" alt="Premium" loading="lazy" /></div><div class="package-card-body"><h3>Premium</h3><p style="color:var(--text-secondary);font-size:0.9rem;">Pro & Supreme plus advanced courses in finance, tech, and creativity for ambitious learners.</p><div class="package-price">₹22,999</div><a href="#" class="btn btn-primary w-100 trigger-auth">Buy Now</a></div></div></div>
+                        <div class="swiper-slide h-auto"><div class="package-card"><span class="package-badge" style="background:#ef4444;">Best Value</span><div class="package-card-img"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=500&h=300&fit=crop" alt="Premium Plus" loading="lazy" /></div><div class="package-card-body"><h3>Premium Plus</h3><p style="color:var(--text-secondary);font-size:0.9rem;">Every course plus specialized training in dropshipping, VFX, Python, fitness, and POD.</p><div class="package-price">₹29,999</div><a href="#" class="btn btn-primary w-100 trigger-auth">Buy Now</a></div></div></div>
+                    </div>
+                    <div class="swiper-pagination mt-4 position-relative"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Courses Grid -->
+        <section class="section-padding" id="courses" data-scroll-section>
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-up">
+                    <span class="section-tag">Featured Courses</span>
+                    <h2 class="section-title">Skills That <span class="gradient-text">Pay</span> Forever</h2>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4 col-sm-6" data-aos="fade-up"><div class="package-card"><div class="package-card-img"><img src="https://images.unsplash.com/photo-1432888622747-f792d6fd3b3f?w=500&h=300&fit=crop" alt="Digital Marketing" loading="lazy" /></div><div class="package-card-body"><h5>Digital Marketing Mastery</h5><p style="color:var(--text-muted);font-size:0.85rem;">12 Weeks • Beginner to Pro</p></div></div></div>
+                    <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100"><div class="package-card"><div class="package-card-img"><img src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=500&h=300&fit=crop" alt="Facebook Ads" loading="lazy" /></div><div class="package-card-body"><h5>Facebook Ads Pro</h5><p style="color:var(--text-muted);font-size:0.85rem;">8 Weeks • Intermediate</p></div></div></div>
+                    <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="200"><div class="package-card"><div class="package-card-img"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=500&h=300&fit=crop" alt="Copywriting" loading="lazy" /></div><div class="package-card-body"><h5>Copywriting That Converts</h5><p style="color:var(--text-muted);font-size:0.85rem;">6 Weeks • All Levels</p></div></div></div>
+                    <div class="col-md-4 col-sm-6" data-aos="fade-up"><div class="package-card"><div class="package-card-img"><img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=500&h=300&fit=crop" alt="Python" loading="lazy" /></div><div class="package-card-body"><h5>Python for Beginners</h5><p style="color:var(--text-muted);font-size:0.85rem;">12 Weeks • Beginner</p></div></div></div>
+                    <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100"><div class="package-card"><div class="package-card-img"><img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f0e4?w=500&h=300&fit=crop" alt="Stock Market" loading="lazy" /></div><div class="package-card-body"><h5>Stock Market Basics</h5><p style="color:var(--text-muted);font-size:0.85rem;">8 Weeks • Beginner</p></div></div></div>
+                    <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="200"><div class="package-card"><div class="package-card-img"><img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=500&h=300&fit=crop" alt="VFX" loading="lazy" /></div><div class="package-card-body"><h5>VFX & Motion Graphics</h5><p style="color:var(--text-muted);font-size:0.85rem;">14 Weeks • Intermediate</p></div></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="section-padding" style="background:rgba(255,255,255,0.01);" data-scroll-section>
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-up"><span class="section-tag">How It Works</span><h2 class="section-title">Your Roadmap to <span class="gradient-text">Mastering</span> Skills</h2></div>
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up"><div class="step-card"><span class="step-number">01</span><span class="step-icon">🚀</span><h5>Enroll & Get Started</h5><p style="color:var(--text-secondary);font-size:0.9rem;">Pick your course, enroll in a few clicks, and access your personalized dashboard.</p></div></div>
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="150"><div class="step-card"><span class="step-number">02</span><span class="step-icon">📚</span><h5>Learn Through Videos</h5><p style="color:var(--text-secondary);font-size:0.9rem;">Dive into expert-led video lessons at your own pace with lifetime access.</p></div></div>
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300"><div class="step-card"><span class="step-number">03</span><span class="step-icon">📜</span><h5>Get Certified</h5><p style="color:var(--text-secondary);font-size:0.9rem;">Earn industry-recognized MSME certificates to validate your expertise.</p></div></div>
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="450"><div class="step-card"><span class="step-number">04</span><span class="step-icon">💼</span><h5>Launch Your Career</h5><p style="color:var(--text-secondary);font-size:0.9rem;">Apply skills, build your portfolio, and start earning in the real world.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Physics -->
+        <section class="section-padding" data-scroll-section>
+            <div class="container"><div class="text-center mb-4" data-aos="fade-up"><h2 class="section-title">Your Skills, Your Greatest <span class="gradient-text">Currency</span></h2></div><div class="physics-container" id="physicsCanvas" data-aos="zoom-in"></div></div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="section-padding" id="testimonials" style="background:rgba(255,255,255,0.01);" data-scroll-section>
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-up"><span class="section-tag">Testimonials</span><h2 class="section-title">Words That <span class="gradient-text">Speak Results</span></h2></div>
+                <div class="splide" id="testimonialSplide">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                            <li class="splide__slide"><div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"VORQEIL transformed my career completely. The courses are comprehensive and the community is incredibly supportive. I went from zero to earning ₹50K/month."</p><div class="testimonial-author"><img src="https://i.pravatar.cc/100?img=1" alt="Priya" loading="lazy" /><div><h5>Priya Sharma</h5><span>Digital Marketer</span></div></div></div></li>
+                            <li class="splide__slide"><div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"The Facebook Ads course changed everything for me. Within 3 months, I was running campaigns for real clients and making a solid income."</p><div class="testimonial-author"><img src="https://i.pravatar.cc/100?img=3" alt="Rahul" loading="lazy" /><div><h5>Rahul Verma</h5><span>Freelancer</span></div></div></div></li>
+                            <li class="splide__slide"><div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"The copywriting course is pure gold. My conversion rates doubled after implementing what I learned. Best investment ever!"</p><div class="testimonial-author"><img src="https://i.pravatar.cc/100?img=5" alt="Ananya" loading="lazy" /><div><h5>Ananya Patel</h5><span>Content Creator</span></div></div></div></li>
+                            <li class="splide__slide"><div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Premium Plus package gave me skills that pay for themselves every single month. The mentorship alone is worth 10x the price."</p><div class="testimonial-author"><img src="https://i.pravatar.cc/100?img=8" alt="Vikram" loading="lazy" /><div><h5>Vikram Singh</h5><span>Entrepreneur</span></div></div></div></li>
+                            <li class="splide__slide"><div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"As a hijabi, I was hesitant. But VORQEIL proved that skills matter more than appearance. Now I'm a qualified digital professional."</p><div class="testimonial-author"><img src="https://i.pravatar.cc/100?img=10" alt="Mantasha" loading="lazy" /><div><h5>Mantasha Ahmed</h5><span>Digital Professional</span></div></div></div></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section-padding" id="faq" data-scroll-section>
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-up"><span class="section-tag">FAQ</span><h2 class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2></div>
+                <div class="row justify-content-center"><div class="col-lg-8"><div class="accordion faq-accordion" id="faqAccordion">
+                    <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#faq1">What happens after I buy?</button></h2><div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion"><div class="accordion-body">You get instant access to your dashboard with lifetime access to your courses, live training invites, and community groups — no waiting, no friction.</div></div></div>
+                    <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq2">Can I actually learn and earn with this?</button></h2><div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Every course is built with real-world application in mind — live tasks, mentorship, and market-ready skills. We don't just teach; we train you to implement.</div></div></div>
+                    <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq3">What makes VORQEIL different from YouTube tutorials?</button></h2><div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Our ecosystem blends structured certification, expert mentorship, community, and execution plans — not just videos. You don't just watch — you build.</div></div></div>
+                    <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq4">Can I upgrade my package later?</button></h2><div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Yes! You can upgrade your package anytime within 7 days by just paying the difference. After that, full pricing applies.</div></div></div>
+                </div></div></div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="section-padding" id="cta" data-scroll-section>
+            <div class="container">
+                <div class="cta-section" data-aos="zoom-in">
+                    <h2 class="section-title mb-3">Ready to <span class="gradient-text">Transform</span> Your Future?</h2>
+                    <p class="section-text mx-auto mb-4">Join 150,000+ learners already building their digital careers with VORQEIL. Start your journey today.</p>
+                    <div class="d-flex gap-3 justify-content-center flex-wrap">
+                        <a href="#" class="btn-primary-custom trigger-auth">Get Started Now <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="btn-outline-custom">Download App <i class="fab fa-google-play"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer" data-scroll-section>
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-4"><a href="#" class="brand mb-3 d-inline-block">VORQ<span class="accent">EIL</span><span class="brand-dot"></span></a><p style="color:var(--text-muted);max-width:300px;">Empowering learners with premium digital skills for the modern world. Join the movement.</p><div class="footer-social mt-3"><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a><a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a><a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a></div></div>
+                    <div class="col-lg-2 col-md-4"><h5>Quick Links</h5><ul class="list-unstyled"><li><a href="#about">About</a></li><li><a href="#courses">Courses</a></li><li><a href="#packages">Packages</a></li><li><a href="#">Blog</a></li></ul></div>
+                    <div class="col-lg-2 col-md-4"><h5>Support</h5><ul class="list-unstyled"><li><a href="#">Contact</a></li><li><a href="#">Disclaimer</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms</a></li></ul></div>
+                    <div class="col-lg-4 col-md-4"><h5>Download App</h5><div><a href="#" class="app-download-btn"><i class="fab fa-google-play"></i> Google Play</a><a href="#" class="app-download-btn"><i class="fab fa-apple"></i> App Store</a></div></div>
+                </div>
+                <hr style="border-color:var(--border-subtle);margin:30px 0 15px;" />
+                <p class="text-center mb-0" style="color:var(--text-muted);font-size:0.85rem;">&copy; 2026 VORQEIL. All rights reserved. Made with ❤️ for digital learners worldwide.</p>
+            </div>
+        </footer>
+    </main>
+
+    <!-- AUTH MODAL -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body pt-0">
+                    <div class="text-center mb-4">
+                        <h3 class="brand mb-0">VORQ<span class="accent">EIL</span></h3>
+                        <p class="text-muted">Welcome back! Sign in to continue.</p>
+                    </div>
+                    <!-- Tabs -->
+                    <ul class="nav auth-tabs justify-content-center mb-4" id="authTab" role="tablist">
+                        <li class="nav-item" role="presentation"><button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#loginPane" type="button" role="tab" aria-controls="loginPane" aria-selected="true">Login</button></li>
+                        <li class="nav-item" role="presentation"><button class="nav-link" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signupPane" type="button" role="tab" aria-controls="signupPane" aria-selected="false">Sign Up</button></li>
+                    </ul>
+                    <div class="tab-content" id="authTabContent">
+                        <!-- Login Pane -->
+                        <div class="tab-pane fade show active" id="loginPane" role="tabpanel" aria-labelledby="login-tab">
+                            <form id="loginForm" onsubmit="return handleLogin(event)">
+                                <div class="mb-3"><input type="email" class="form-control" placeholder="Email address" required /></div>
+                                <div class="mb-3"><input type="password" class="form-control" placeholder="Password" required /></div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="rememberMe" /><label class="form-check-label" for="rememberMe">Remember me</label></div>
+                                    <a href="#" class="text-decoration-none" style="color:var(--accent-3);">Forgot Password?</a>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 mb-3">Sign In</button>
+                            </form>
+                        </div>
+                        <!-- Signup Pane -->
+                        <div class="tab-pane fade" id="signupPane" role="tabpanel" aria-labelledby="signup-tab">
+                            <form id="signupForm" onsubmit="return handleSignup(event)">
+                                <div class="mb-3"><input type="text" class="form-control" placeholder="Full Name" required /></div>
+                                <div class="mb-3"><input type="email" class="form-control" placeholder="Email address" required /></div>
+                                <div class="mb-3"><input type="password" class="form-control" placeholder="Password" required /></div>
+                                <button type="submit" class="btn btn-primary w-100 mb-3">Create Account</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="divider"><span>or continue with</span></div>
+                    <button class="google-btn" id="googleLoginBtn">
+                        <i class="fab fa-google"></i> Continue with Google
+                    </button>
+                    <p class="text-center mt-3" style="color:var(--text-muted); font-size:0.85rem;">By continuing, you agree to our Terms & Privacy Policy.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorDot = document.querySelector('.custom-cursor-dot');
+        let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+        document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.2; cursorY += (mouseY - cursorY) * 0.2;
+            if (cursor) { cursor.style.left = cursorX + 'px'; cursor.style.top = cursorY + 'px'; }
+            if (cursorDot) { cursorDot.style.left = mouseX + 'px'; cursorDot.style.top = mouseY + 'px'; }
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+        document.querySelectorAll('a, button, .btn, .package-card, .step-card, .testimonial-card, input, textarea').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor && cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor && cursor.classList.remove('hover'));
+        });
+
+        // Locomotive Scroll
+        let locomotiveScroll;
+        function initLocomotive() {
+            if (window.innerWidth > 991) {
+                locomotiveScroll = new LocomotiveScroll({
+                    el: document.querySelector('#main-container'),
+                    smooth: true,
+                    multiplier: 0.8,
+                    lerp: 0.1,
+                    smartphone: { smooth: false },
+                    tablet: { smooth: false },
+                });
+                document.querySelector('#main-container').style.backgroundColor = 'var(--bg-deep)';
+                locomotiveScroll.on('scroll', ScrollTrigger.update);
+                ScrollTrigger.scrollerProxy('#main-container', {
+                    scrollTop(value) {
+                        return arguments.length ? locomotiveScroll.scrollTo(value, 0, 0) : locomotiveScroll.scroll.instance.scroll.y;
+                    },
+                    getBoundingClientRect() { return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight }; },
+                });
+                ScrollTrigger.addEventListener('refresh', () => locomotiveScroll.update());
+                ScrollTrigger.refresh();
+            }
+        }
+        initLocomotive();
+        window.addEventListener('resize', () => {
+            if (locomotiveScroll) { locomotiveScroll.destroy(); locomotiveScroll = null; }
+            document.querySelector('#main-container').style.backgroundColor = 'var(--bg-deep)';
+            initLocomotive();
+        });
+
+        // Header scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+
+        AOS.init({ duration: 800, once: true, easing: 'ease-out-cubic' });
+
+        // Swiper packages
+        new Swiper('.packagesSwiper', {
+            slidesPerView: 1, spaceBetween: 20, loop: true,
+            autoplay: { delay: 4000, disableOnInteraction: false },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            breakpoints: { 640: { slidesPerView: 2 }, 992: { slidesPerView: 3 }, 1200: { slidesPerView: 4 } },
+        });
+
+        // Splide clients
+        new Splide('#clientSplide', {
+            type: 'loop', perPage: 5, arrows: false, pagination: false, drag: true,
+            autoScroll: { speed: 1.2, autoStart: true, pauseOnHover: true, pauseOnFocus: false },
+            breakpoints: { 768: { perPage: 3 }, 576: { perPage: 2 } },
+        }).mount({ AutoScroll: window.splide.Extensions.AutoScroll });
+
+        // Splide testimonials
+        new Splide('#testimonialSplide', {
+            type: 'loop', perPage: 3, arrows: false, pagination: false, gap: 20, drag: true,
+            autoScroll: { speed: 0.6, autoStart: true, pauseOnHover: true, pauseOnFocus: false },
+            breakpoints: { 992: { perPage: 2 }, 768: { perPage: 1 } },
+        }).mount({ AutoScroll: window.splide.Extensions.AutoScroll });
+
+        // Matter.js physics
+        (function() {
+            const container = document.getElementById('physicsCanvas');
+            if (!container || typeof Matter === 'undefined') return;
+            const { Engine, Render, World, Bodies, Mouse, MouseConstraint } = Matter;
+            const engine = Engine.create(); engine.world.gravity.y = 0.08;
+            const w = container.offsetWidth, h = container.offsetHeight;
+            const render = Render.create({ element: container, engine: engine, options: { width: w, height: h, background: 'transparent', wireframes: false, pixelRatio: 2 } });
+            const skills = ['Product Design','Digital Marketing','Paid Marketing','UX Design','Video Production','Graphic Design','Web Dev','Content Creation','Social Growth','Sales Mastery','AI Automation','Freelancing'];
+            const colors = ['#6366f1','#8b5cf6','#06b6d4','#10b981','#f59e0b','#ef4444'];
+            skills.forEach((skill,i) => {
+                const body = Bodies.rectangle(Math.random()*w*0.8+w*0.1, Math.random()*h*0.4, skill.length*11+36, 40, {
+                    chamfer: { radius: 20 },
+                    render: { fillStyle: colors[i%colors.length], text: { content: skill, color: '#fff', size: 13 } }
+                });
+                World.add(engine.world, body);
+            });
+            [Bodies.rectangle(w/2,h+50,w,100,{isStatic:true}), Bodies.rectangle(-50,h/2,100,h,{isStatic:true}), Bodies.rectangle(w+50,h/2,100,h,{isStatic:true}), Bodies.rectangle(w/2,-50,w,100,{isStatic:true})].forEach(w=>World.add(engine.world,w));
+            const mouse = Mouse.create(render.canvas);
+            World.add(engine.world, MouseConstraint.create(engine, { mouse, constraint: { stiffness: 0.2 } }));
+            Engine.run(engine); Render.run(render);
+            window.addEventListener('resize', () => Render.setSize(render, container.offsetWidth, container.offsetHeight));
+        })();
+
+        // Counter animation
+        function animateCounters() {
+            document.querySelectorAll('.hero-stat h3').forEach(el => {
+                const text = el.textContent; const numMatch = text.match(/[\d.]+/); if (!numMatch) return;
+                const target = parseFloat(numMatch[0]); const suffix = text.replace(numMatch[0], '');
+                let current = 0; const duration = 2000; const step = target / (duration / 16);
+                const observer = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        const interval = setInterval(() => {
+                            current += step;
+                            if (current >= target) { el.innerHTML = target + suffix; clearInterval(interval); }
+                            else { el.innerHTML = Math.floor(current) + suffix; }
+                        }, 16);
+                        observer.disconnect();
+                    }
+                }, { threshold: 0.5 });
+                observer.observe(el);
+            });
+        }
+        animateCounters();
+
+        // Smooth nav scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href'); if (targetId === '#') return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    if (locomotiveScroll && window.innerWidth > 991) locomotiveScroll.scrollTo(target);
+                    else target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    const navbarCollapse = document.getElementById('mainNav');
+                    if (navbarCollapse.classList.contains('show')) document.querySelector('.navbar-toggler').click();
+                }
+            });
+        });
+
+        // GSAP parallax
+        gsap.registerPlugin(ScrollTrigger);
+        if (window.innerWidth > 768) {
+            gsap.to('.hero-orb-1', { scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }, y: 120, scale: 1.3, opacity: 0.15 });
+            gsap.to('.hero-orb-2', { scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }, y: -80, scale: 0.9, opacity: 0.2 });
+        }
+
+        // AUTH MODAL TRIGGER
+        const authModal = new bootstrap.Modal(document.getElementById('authModal'));
+        document.querySelectorAll('.trigger-auth').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                authModal.show();
+            });
+        });
+
+        // Form handlers (simulated)
+        function handleLogin(e) {
+            e.preventDefault();
+            alert('Login successful! (Simulated) Redirecting to dashboard...');
+            authModal.hide();
+            return false;
+        }
+        function handleSignup(e) {
+            e.preventDefault();
+            alert('Account created! (Simulated) Welcome to VORQEIL.');
+            authModal.hide();
+            return false;
+        }
+
+        console.log('%c🚀 VORQEIL %cPremium EdTech Platform %cReady', 'font-size:1.4rem;font-weight:bold;color:#06b6d4;', 'color:#94a3b8;', 'color:#10b981;font-weight:bold;');
+   document.getElementById("googleLoginBtn").addEventListener("click", function() {
+    window.location.href = "https://accounts.google.com";
+});
+    </script>
+</body>
+</html>
