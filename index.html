@@ -823,7 +823,8 @@
     document.getElementById("googleLoginBtn").addEventListener("click", async () => {
       try {
         const result = await signInWithPopup(auth, provider);
-        alert("Welcome " + result.user.displayName);
+alert("Welcome " + result.user.displayName);
+window.location.href = "dashboard.html";
       } catch (error) {
         alert("Login failed: " + error.message);
       }
