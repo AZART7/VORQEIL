@@ -1,7 +1,16 @@
 // Auth Guard - Protects dashboard and admin pages
 // Redirects unauthenticated users to login
 
-import { auth, onAuthStateChanged, doc, getDoc, db, serverTimestamp } from './firebase-config.js';
+import {
+  auth,
+  onAuthStateChanged,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  db,
+  serverTimestamp
+} from './firebase-config.js';
 
 const ADMIN_EMAILS = ['admin@vorqeil.com', 'vorqeil.admin@gmail.com'];
 
