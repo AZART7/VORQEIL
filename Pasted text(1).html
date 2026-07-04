@@ -781,13 +781,14 @@
             });
         });
 
-        // Form handlers (simulated)
+               // Form handlers (simulated)
         function handleLogin(e) {
             e.preventDefault();
             alert('Login successful! (Simulated) Redirecting to dashboard...');
             authModal.hide();
             return false;
         }
+
         function handleSignup(e) {
             e.preventDefault();
             alert('Account created! (Simulated) Welcome to VORQEIL.');
@@ -795,10 +796,39 @@
             return false;
         }
 
-        console.log('%c🚀 VORQEIL %cPremium EdTech Platform %cReady', 'font-size:1.4rem;font-weight:bold;color:#06b6d4;', 'color:#94a3b8;', 'color:#10b981;font-weight:bold;');
-   document.getElementById("googleLoginBtn").addEventListener("click", function() {
-    window.location.href = "https://accounts.google.com";
-});
+        console.log('%c🚀 VORQEIL %cPremium EdTech Platform %cReady',
+        'font-size:1.4rem;font-weight:bold;color:#06b6d4;',
+        'color:#94a3b8;',
+        'color:#10b981;font-weight:bold;');
     </script>
+
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB4QtkhGenKmg5IF0001rV2g7asfSXCCRY",
+      authDomain: "vorqeil.firebaseapp.com",
+      projectId: "vorqeil",
+      storageBucket: "vorqeil.firebasestorage.app",
+      messagingSenderId: "533299397585",
+      appId: "1:533299397585:web:640646ea30e7bd678216f0",
+      measurementId: "G-KGB0JX6D84"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    document.getElementById("googleLoginBtn").addEventListener("click", async () => {
+      try {
+        const result = await signInWithPopup(auth, provider);
+        alert("Welcome " + result.user.displayName);
+      } catch (error) {
+        alert("Login failed: " + error.message);
+      }
+    });
+    </script>
+
 </body>
 </html>
